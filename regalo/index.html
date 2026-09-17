@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Mi Persona Favorita ❤️ | Feliz Cumpleaños</title>
+    
+    <!-- Metadatos para compartir por WhatsApp / Redes sociales al escanear QR -->
+    <meta property="og:title" content="Una sorpresa especial para ti ❤️">
+    <meta property="og:description" content="Toca aquí para abrir tu carta y regalo virtual de cumpleaños.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800">
+    <meta name="theme-color" content="#b83b5e">
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
+</head>
+<body>
+
+    <!-- LIENZO DE PÉTALOS Y DESTELLOS FLOTANTES -->
+    <canvas id="canvas-particles"></canvas>
+
+    <!-- PANTALLA DE APERTURA / BIENVENIDA (UNBOXING INTERACTIVO DE 5 TOQUES) -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="envelope-wrapper" id="welcome-envelope">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-pocket"></div>
+                    <div class="wax-seal" id="welcome-seal">💌</div>
+                </div>
+            </div>
+            <h1 class="welcome-title">Para Ti</h1>
+            <p class="welcome-subtitle">He preparado un rinconcito especial lleno de recuerdos y amor...</p>
+            
+            <!-- CONTENEDOR DE DESBLOQUEO INTERACTIVO DE 5 TOQUES -->
+            <div class="unlock-container">
+                <button class="btn-open" id="btn-open-gift">
+                    <span id="btn-text">Toca para abrir tu regalo</span>
+                    <span class="btn-icon" id="btn-icon">💌</span>
+                </button>
+
+                <!-- Barra de Progreso y Mensajes Progresivos -->
+                <div class="progress-section" id="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-msg" id="progress-msg">Toca para desbloquear tu sorpresa ✨</span>
+                        <span class="progress-percent" id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                    </div>
+                    <div class="click-dots" id="click-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN DE CONTROL DE MÚSICA FLOTANTE -->
+    <div class="music-player-btn" id="music-toggle-btn" title="Controlar música">
+        <span class="music-icon" id="music-icon">🎵</span>
+        <span class="music-text" id="music-text">Música: Lista</span>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DE LA PÁGINA -->
+    <div class="main-wrapper">
+
+        <!-- SECCIÓN 1: ENCABEZADO & FELICITACIÓN DE CUMPLEAÑOS -->
+        <section class="hero-section visible">
+            <div class="romantic-badge">✨ Un día muy especial ✨</div>
+            <h1 class="hero-names" id="hero-names">Sofi</h1>
+            <h2 class="birthday-title" id="birthday-title">¡Feliz Cumpleaños, Mi Amor!</h2>
+            <p class="birthday-subtitle" id="birthday-subtitle">Hoy celebro el día en que nació la persona más maravillosa del mundo ❤️</p>
+            <div class="decorative-divider">
+                <div class="divider-line"></div>
+                <div class="divider-heart">💖</div>
+                <div class="divider-line"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CARTA DE AMOR & MENSAJE ESPECIAL (ARRIBA DE NUESTRA FECHA) -->
+        <section class="letter-section">
+            <div class="letter-wrapper">
+                <div class="letter-header">
+                    <div class="letter-seal-icon">🌹</div>
+                    <h2 class="section-title" style="margin-bottom: 5px;">Una Carta Desde Mi Corazón</h2>
+                    <div class="decorative-divider" style="margin: 15px auto;">
+                        <div class="divider-line"></div>
+                        <div class="divider-heart" style="font-size: 1rem;">💌</div>
+                        <div class="divider-line"></div>
+                    </div>
+                </div>
+
+                <div class="letter-saludo" id="letter-saludo">Para mi amor...</div>
+
+                <div class="letter-body" id="letter-body">
+                    <!-- Se rellena automáticamente con config.js -->
+                </div>
+
+                <div class="letter-footer">
+                    <div class="letter-despedida" id="letter-despedida">Con todo mi amor,</div>
+                    <div class="letter-firma" id="letter-firma">Tuyo eternamente ❤️</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CONTADOR DE TIEMPO EN VIVO & FECHA DE ANIVERSARIO -->
+        <section class="counter-section">
+            <div class="counter-card">
+                <h2 class="section-title">Nuestra Historia de Amor</h2>
+                <div class="anniversary-badge" id="anniversary-date">
+                    <span>⏳</span> Juntos desde el...
+                </div>
+                <p class="section-subtitle">Cada instante a tu lado ha valido una eternidad</p>
+
+                <div class="countdown-grid">
+                    <div class="time-box">
+                        <span class="time-value" id="count-years">0</span>
+                        <span class="time-label">Años</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="count-months">0</span>
+                        <span class="time-label">Meses</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="count-days">0</span>
+                        <span class="time-label">Días</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="count-hours">00</span>
+                        <span class="time-label">Horas</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="count-minutes">00</span>
+                        <span class="time-label">Minutos</span>
+                    </div>
+                    <div class="time-box">
+                        <span class="time-value" id="count-seconds">00</span>
+                        <span class="time-label">Segundos</span>
+                    </div>
+                </div>
+
+                <p class="counter-quote" id="counter-quote">"Cada segundo a tu lado es el regalo más hermoso de mi vida."</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: GALERÍA DE RECUERDOS (POLAROID) -->
+        <section class="gallery-section">
+            <h2 class="section-title">Nuestros Momentos Inolvidables 📸</h2>
+            <p class="section-subtitle">Pedacitos de nuestra historia que llevo guardados en el alma</p>
+            
+            <div class="polaroid-grid" id="polaroid-grid">
+                <!-- Se rellena automáticamente con config.js -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: RAZONES POR LAS QUE TE AMO -->
+        <section class="reasons-section">
+            <h2 class="section-title">Razones por las que te Amo 💝</h2>
+            <p class="section-subtitle">Podría escribir miles, pero aquí hay algunas de mis favoritas:</p>
+            
+            <div class="reasons-grid" id="reasons-grid">
+                <!-- Se rellena automáticamente con config.js -->
+            </div>
+        </section>
+
+        <!-- PIE DE PÁGINA -->
+        <footer>
+            <p>Hecho con todo el <span class="footer-heart">❤️</span> del mundo para la persona más especial.</p>
+            <p style="font-size: 0.8rem; margin-top: 6px; opacity: 0.8;">¡Feliz Cumpleaños & Feliz Aniversario!</p>
+        </footer>
+
+    </div>
+
+    <!-- MODAL LIGHTBOX PARA FOTOS EN PANTALLA COMPLETA -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+            <div class="lightbox-img-box">
+                <img src="" alt="Recuerdo" id="lightbox-img">
+            </div>
+            <div class="lightbox-caption-box">
+                <h3 class="lightbox-title" id="lightbox-title"></h3>
+                <p class="lightbox-desc" id="lightbox-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR OCULTO PARA REPRODUCTOR DE AUDIO / YOUTUBE -->
+    <div id="youtube-audio-player" style="position:fixed; bottom:-9999px; left:-9999px; width:1px; height:1px; opacity:0.01; pointer-events:none;"></div>
+
+    <!-- SCRIPTS -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

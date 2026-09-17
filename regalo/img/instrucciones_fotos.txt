@@ -1,0 +1,21 @@
+# Carpeta de Imágenes
+
+Puedes colocar aquí las fotos que quieras mostrar en la galería.
+
+Por ejemplo:
+- foto1.jpg
+- foto2.jpg
+- foto3.jpg
+
+Y luego en `js/config.js` las puedes enlazar así:
+```javascript
+fotos: [
+    {
+        url: "img/foto1.jpg",
+        titulo: "Nuestro primer viaje",
+        fecha: "Enero 2024",
+        descripcion: "Un momento mágico juntos..."
+    },
+    // ...
+]
+```

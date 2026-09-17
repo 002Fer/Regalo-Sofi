@@ -1,0 +1,7 @@
+# Carpeta de Audio
+
+Puedes colocar aquí tu archivo de música en formato MP3 si deseas que suene sin depender de conexión a internet.
+
+Por ejemplo:
+- Guarda tu archivo con el nombre: `es_verdad.mp3`
+- La página lo detectará automáticamente y lo reproducirá con la mejor calidad.
